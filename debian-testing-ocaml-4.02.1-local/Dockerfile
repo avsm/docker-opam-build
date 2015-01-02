@@ -21,4 +21,6 @@ RUN sudo -u opam sh -c "git clone git://github.com/ocaml/opam-repository"
 RUN sudo -u opam sh -c "opam init -a -y /home/opam/opam-repository"
 RUN sudo -u opam sh -c "opam switch -y 4.02.1"
 WORKDIR /home/opam/opam-repository
+RUN sudo -u opam sh -c "opam config exec ocaml -version"
+RUN sudo -u opam sh -c "opam --version"
 ONBUILD RUN sudo -u opam sh -c "cd /home/opam/opam-repository && git pull && opam update -u -y"
