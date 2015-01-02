@@ -4,6 +4,9 @@ MAINTAINER Anil Madhavapeddy <anil@recoil.org>
 RUN git config --global user.email "docker@example.com"
 RUN git config --global user.name "Docker CI"
 RUN apt-get -y install opam aspcud
+RUN echo 'opam ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/opam
+RUN chmod 440 /etc/sudoers.d/opam
+RUN chown root:root /etc/sudoers.d/opam
 RUN adduser --disabled-password --gecos '' opam
 RUN passwd -l opam
 RUN chown -R opam:opam /home/opam

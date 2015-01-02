@@ -8,6 +8,9 @@ RUN curl -OL http://download.opensuse.org/repositories/home:/ocaml//xUbuntu_14.0
 RUN apt-key add - < Release.key
 RUN apt-get -y update
 RUN apt-get -y install opam aspcud
+RUN echo 'opam ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/opam
+RUN chmod 440 /etc/sudoers.d/opam
+RUN chown root:root /etc/sudoers.d/opam
 RUN adduser --disabled-password --gecos '' opam
 RUN passwd -l opam
 RUN chown -R opam:opam /home/opam
