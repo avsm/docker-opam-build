@@ -5,6 +5,7 @@ MAINTAINER Anil Madhavapeddy <anil@recoil.org>
 RUN git config --global user.email "docker@example.com"
 RUN git config --global user.name "Docker CI"
 RUN curl -o /etc/yum.repos.d/home:ocaml.repo -OL http://download.opensuse.org/repositories/home:ocaml/CentOS_7/home:ocaml.repo
+RUN yum install -y opam
 RUN echo 'opam ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/opam
 RUN chmod 440 /etc/sudoers.d/opam
 RUN chown root:root /etc/sudoers.d/opam
