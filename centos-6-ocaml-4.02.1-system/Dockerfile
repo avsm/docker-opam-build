@@ -7,6 +7,7 @@ RUN git config --global user.name "Docker CI"
 RUN sh -c "git clone git://github.com/avsm/opam-installext && cd opam-installext && make && make PREFIX=/usr install && cd .. && rm -rf opam-installext"
 RUN curl -o /etc/yum.repos.d/home:ocaml.repo -OL http://download.opensuse.org/repositories/home:ocaml/CentOS_6/home:ocaml.repo
 RUN yum install -y opam
+RUN sed -i.bak '/LC_TIME LC_ALL LANGUAGE/aDefaults    env_keep += "OPAMYES OPAMJOBS OPAMVERBOSE"' /etc/sudoers
 RUN echo 'opam ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/opam
 RUN chmod 440 /etc/sudoers.d/opam
 RUN chown root:root /etc/sudoers.d/opam
