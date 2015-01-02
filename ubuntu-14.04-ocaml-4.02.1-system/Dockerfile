@@ -4,7 +4,7 @@ MAINTAINER Anil Madhavapeddy <anil@recoil.org>
 RUN git config --global user.email "docker@example.com"
 RUN git config --global user.name "Docker CI"
 RUN echo "deb http://download.opensuse.org/repositories/home:/ocaml//xUbuntu_14.04/ /" > /etc/apt/sources.list.d/opam.list
-RUN curl -OL http://download.opensuse.org/repositories/home:/ocaml//Release.key
+RUN curl -OL http://download.opensuse.org/repositories/home:/ocaml//xUbuntu_14.04/Release.key
 RUN apt-key add - < Release.key
 RUN apt-get -y update
 RUN apt-get -y install opam aspcud
