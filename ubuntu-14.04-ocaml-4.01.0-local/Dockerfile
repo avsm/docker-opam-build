@@ -21,4 +21,5 @@ RUN sudo -u opam sh -c "opam init -a -y /home/opam/opam-repository"
 RUN sudo -u opam sh -c "opam switch -y 4.01.0"
 WORKDIR /home/opam/opam-repository
 RUN sudo -u opam sh -c "opam install -y opam-installext"
+RUN sh -c "cp `opam config var bin`/opam-installext /usr/bin/opam-installext"
 ONBUILD RUN sudo -u opam sh -c "cd /home/opam/opam-repository && git pull && opam update -u -y"
