@@ -4,6 +4,7 @@ FROM avsm/docker-ocaml-build:ubuntu-14.04
 MAINTAINER Anil Madhavapeddy <anil@recoil.org>
 RUN git config --global user.email "docker@example.com"
 RUN git config --global user.name "Docker CI"
+RUN sh -c "git clone git://github.com/avsm/opam-installext && cd opam-installext && make && make PREFIX=/usr install && cd .. && rm -rf opam-installext"
 RUN git clone -b 1.2 git://github.com/ocaml/opam
 RUN sh -c "cd opam && make cold && make install"
 RUN echo 'opam ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/opam
@@ -20,6 +21,4 @@ RUN sudo -u opam sh -c "git clone git://github.com/ocaml/opam-repository"
 RUN sudo -u opam sh -c "opam init -a -y /home/opam/opam-repository"
 RUN sudo -u opam sh -c "opam switch -y 4.02.1"
 WORKDIR /home/opam/opam-repository
-RUN sudo -u opam sh -c "opam install -y opam-installext"
-RUN sh -c "cp `opam config var bin`/opam-installext /usr/bin/opam-installext"
 ONBUILD RUN sudo -u opam sh -c "cd /home/opam/opam-repository && git pull && opam update -u -y"

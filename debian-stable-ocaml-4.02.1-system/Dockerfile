@@ -4,6 +4,7 @@ FROM avsm/docker-ocaml-build:debian-stable
 MAINTAINER Anil Madhavapeddy <anil@recoil.org>
 RUN git config --global user.email "docker@example.com"
 RUN git config --global user.name "Docker CI"
+RUN sh -c "git clone git://github.com/avsm/opam-installext && cd opam-installext && make && make PREFIX=/usr install && cd .. && rm -rf opam-installext"
 RUN echo "deb http://download.opensuse.org/repositories/home:/ocaml//Debian_7.0/ /" > /etc/apt/sources.list.d/opam.list
 RUN curl -OL http://download.opensuse.org/repositories/home:/ocaml//Debian_7.0/Release.key
 RUN apt-key add - < Release.key
@@ -23,6 +24,4 @@ ENV OPAMYES 1
 RUN sudo -u opam sh -c "git clone git://github.com/ocaml/opam-repository"
 RUN sudo -u opam sh -c "opam init -a -y /home/opam/opam-repository"
 WORKDIR /home/opam/opam-repository
-RUN sudo -u opam sh -c "opam install -y opam-installext"
-RUN sh -c "cp `opam config var bin`/opam-installext /usr/bin/opam-installext"
 ONBUILD RUN sudo -u opam sh -c "cd /home/opam/opam-repository && git pull && opam update -u -y"
