@@ -8,6 +8,7 @@ RUN echo "deb http://download.opensuse.org/repositories/home:/ocaml//xUbuntu_14.
 RUN curl -OL http://download.opensuse.org/repositories/home:/ocaml//xUbuntu_14.04/Release.key
 RUN apt-key add - < Release.key
 RUN apt-get -y update
+RUN apt-get -y upgrade
 RUN apt-get -y install opam aspcud
 RUN echo 'opam ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/opam
 RUN chmod 440 /etc/sudoers.d/opam
