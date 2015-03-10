@@ -7,6 +7,8 @@ RUN git config --global user.name "Docker CI"
 RUN sh -c "git clone git://github.com/avsm/opam-installext && cd opam-installext && make && make PREFIX=/usr install && cd .. && rm -rf opam-installext"
 RUN git clone -b 1.2 git://github.com/ocaml/opam
 RUN sh -c "cd opam && make cold && make install"
+RUN echo export PATH="/usr/local/bin:$PATH" >> /etc/profile.d/usrlocal.sh
+RUN chmod a+x /etc/profile.d/usrlocal.sh
 RUN sed -i.bak '/LC_TIME LC_ALL LANGUAGE/aDefaults    env_keep += "OPAMYES OPAMJOBS OPAMVERBOSE"' /etc/sudoers
 RUN echo 'opam ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/opam
 RUN chmod 440 /etc/sudoers.d/opam
