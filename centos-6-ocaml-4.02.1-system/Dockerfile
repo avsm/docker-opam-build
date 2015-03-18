@@ -9,7 +9,7 @@ RUN curl -o /etc/yum.repos.d/home:ocaml.repo -OL http://download.opensuse.org/re
 RUN yum -y upgrade
 RUN yum install -y ocaml ocaml-camlp4-devel ocaml-ocamldoc
 RUN git clone -b 1.2 git://github.com/ocaml/opam
-RUN sh -c "cd opam && make cold && make install"
+RUN sh -c "cd opam && make cold && make prefix=\"/usr\" install"
 RUN sed -i.bak '/LC_TIME LC_ALL LANGUAGE/aDefaults    env_keep += "OPAMYES OPAMJOBS OPAMVERBOSE"' /etc/sudoers
 RUN echo 'opam ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/opam
 RUN chmod 440 /etc/sudoers.d/opam
