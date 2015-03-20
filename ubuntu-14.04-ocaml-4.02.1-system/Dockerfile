@@ -29,3 +29,5 @@ RUN sudo -u opam sh -c "opam config exec -- ocaml -version"
 RUN sudo -u opam sh -c "opam --version"
 ONBUILD RUN sudo -u opam sh -c "cd /home/opam/opam-repository && git pull && opam update -u -y"
 RUN sudo -u opam sh -c "opam install -y depext"
+ONBUILD RUN apt-get -y update
+ONBUILD RUN apt-get -y upgrade
